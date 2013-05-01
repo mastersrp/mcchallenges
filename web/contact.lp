@@ -1,11 +1,12 @@
 <?
-	print( 'HTTP/1.0 200 OK\r\nContent-Type text/html\r\n\r\n' )
+	require( 'template' )
+	template.init()
+
+	template.set( 'web/header.html' )
 ?>
 
-<html lang="da">
-	<head>
-		<meta charset="utf8" />
-	</head>
-	<body>
-	</body>
-</html>
+
+
+<?
+	template.set( 'web/footer.html' )
+?>
