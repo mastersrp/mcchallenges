@@ -5,9 +5,11 @@
 	template.set( 'web/header.html' )
 ?>
 
-	<div class="well">
-		dicks
-	</div>
+	<ul class="navtabs">
+		<li class="tab">	
+			faget
+		</li>
+	</ul>
 
 <?
 	template.set( 'web/footer.html' )

@@ -6,3 +6,7 @@ mongoose/mongoose: mongoose/lua/Makefile
 mongoose/lua/Makefile:
 	git submodule foreach git submodule init
 	git submodule foreach git submodule update
+
+clean:
+	make -C mongoose/lua clean
+	make -C mongoose clean
