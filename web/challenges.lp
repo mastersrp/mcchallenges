@@ -8,7 +8,7 @@
 <input type="text" class="search-query span12" ng-model="query" ng-placeholder="filter"/>
 
 <div class="content well span12" ng-controller="ChallengesCtrl">
-	<table class="table">
+	<table class="table table-striped">
 		<tr>
 			<th>
 				Challenges
