@@ -1,6 +1,6 @@
 template = {}
 
-if not template.sets then template.sets = {} end
+template.sets = {}
 
 template.init = function()
 	print( 'HTTP/1.0 200 OK\r\nContent-Type: text/html\r\n\r\n' )
