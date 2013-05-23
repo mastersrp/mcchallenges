@@ -1,0 +1,27 @@
+require 'io'
+
+local deps = {}
+
+deps["mongoose"] = {
+	url="valenok/mongoose",
+	configure=function( root )
+		io.open(root .. '/build.sh','w'):write('#!/bin/bash\nmake linux_lua CFLAGS="-lm -lpthread"\nfind lua-5.2.1 -iname "*.o" -or -iname "*.a" -delete')
+		io.open(root .. '/Tupfile','w'):write(': |> bash build.sh |> mongoose')
+	end
+}
+
+local pkg = {}
+
+pkg["mcchallenges"] = {
+	configure=function( cfg )
+		local conf = cfg[4]
+		conf.create( 'DEBUG','n' )
+		conf.create( 'CC', 'gcc' )
+		conf.create( 'AR', 'ar rcu' )
+		os.execute('bundle install')
+	end
+}
+
+return deps,pkg
+
+-- vim: filetype=lua
