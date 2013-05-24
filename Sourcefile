@@ -14,7 +14,6 @@ local pkg = {}
 
 pkg["mcchallenges"] = {
 	configure=function( cfg )
-		local conf = cfg[4]
 		conf.create( 'DEBUG','n' )
 		conf.create( 'CC', 'gcc' )
 		conf.create( 'AR', 'ar rcu' )
