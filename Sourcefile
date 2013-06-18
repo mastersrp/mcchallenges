@@ -1,26 +1,31 @@
-require 'io'
+set NAME "MCChallenges"
+set DESC "A portable Minecraft challenge website"
+set VERSION "git"
+set HOMEPAGE ""
+set CAT "anon"
 
-local deps = {}
-
-deps["mongoose"] = {
-	url="valenok/mongoose",
-	configure=function( root )
-		io.open(root .. '/build.sh','w'):write('#!/bin/bash\nmake linux_lua CFLAGS="-lm -lpthread"\nfind lua-5.2.1 -iname "*.o" -or -iname "*.a" -delete')
-		io.open(root .. '/Tupfile','w'):write(': |> bash build.sh |> mongoose')
-	end
+set RDEPENDS {
+	>=git-1.8
 }
 
-local pkg = {}
+set git [exec which git]
+set out /dev/stdout
 
-pkg["mcchallenges"] = {
-	configure=function( cfg )
-		conf.create( 'DEBUG','n' )
-		conf.create( 'CC', 'gcc' )
-		conf.create( 'AR', 'ar rcu' )
-		os.execute('bundle install')
-	end
+proc fetch {} {
+	if { [file exists deps/mongoose/] == 0 } {
+		exec $::git clone git://github.com/valenok/mongoose deps/mongoose > $::out
+	}
 }
 
-return deps,pkg
+proc configure {} {
+	exec bundle install > $::out
+}
 
--- vim: filetype=lua
+proc build {} {
+	exec make -C deps/mongoose linux_lua CFLAGS=-lm\ -lpthread > $::out
+}
+
+proc install {} {
+}
+
+# vim: filetype=tcl
